@@ -11,7 +11,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 def checkHIBP(email):
     result = []
     headers = {
-        'hibp-api-key': '4d56711edb2c4b72b8a418ea2c558d41',
+        'hibp-api-key': 'bd58fb1e50504427afc79786e6f1fb2c',
         'user-agent': 'CyberRat'
     }
 

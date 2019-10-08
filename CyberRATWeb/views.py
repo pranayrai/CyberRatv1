@@ -96,19 +96,13 @@ def get_search_result_entity(search):
     else:
         entity.twitter_data = None
 
-    """if (len(entity.breachNumber) <= 0):
-        entity.threatLevel = '0%'
-    elif (len(entity.breachNumber) < 3):
-        entity.threatLevel = '25%'
-    elif (len(entity.breachNumber) < 5):
-        entity.threatLevel = '50%'
-    else:
-        entity.threatLevel = '100%'"""
     threat = len(entity.breachNumber) * 8
     if (threat > 50):
         threat = 50
     entity.threatLevel = entity.threatLevel + threat
     if (entity.threatLevel > 85):
         entity.threatLevel = 80
+    entity.threatLevel = 100 - entity.threatLevel
+
 
     return entity

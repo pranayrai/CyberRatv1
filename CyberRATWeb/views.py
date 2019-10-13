@@ -75,11 +75,14 @@ def get_search_result_entity(search):
     entity.name = name
     entity.breachNumber = checkHIBP(email)
     entity.breachedSites = checkHIBP(email)
+    entity.profilePhoto = ProfilePhoto(profile_link)
     entity.facebook_data = Facebook(profile_link)
 
-    entity.threatLevel = (len(entity.facebook_data) - 1) * 3
-    if (entity.threatLevel > 50):
-        entity.threatLevel = 50
+    entity.threatLevel = 100
+
+    threat = (len(entity.facebook_data)) * 3
+    if (threat > 0):
+        entity.threatLevel -= threat
 
     if (instagram_link != ""):
         time_line_data = get_instagram_posts(instagram_link)
@@ -87,7 +90,6 @@ def get_search_result_entity(search):
     else:
         entity.time_line_data = None
 
-    entity.profilePhoto = ProfilePhoto(profile_link)
     entity.twitter_posts = []
     if (twitter_link != ""):
         twitter_results = TwitterData(twitter_link)
@@ -97,12 +99,9 @@ def get_search_result_entity(search):
         entity.twitter_data = None
 
     threat = len(entity.breachNumber) * 8
-    if (threat > 50):
-        threat = 50
-    entity.threatLevel = entity.threatLevel + threat
-    if (entity.threatLevel > 85):
-        entity.threatLevel = 80
-    entity.threatLevel = 100 - entity.threatLevel
+    if (threat > 0):
+        entity.threatLevel -= threat
 
-
+    if (entity.threatLevel < 0):
+        entity.threatLevel = 1
     return entity

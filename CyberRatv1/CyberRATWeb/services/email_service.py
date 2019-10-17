@@ -30,8 +30,6 @@ class EmailService:
             EmailService.__instance = self
 
         port = 465  # For SSL
-        password = "Tj~M8%M^kH"
-
         # Create a secure SSL context
         context = ssl.create_default_context()
         self.server = smtplib.SMTP_SSL("smtp.gmail.com", port, context=context)
